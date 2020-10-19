@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Button } from 'antd';
+import React, { Component } from 'react';
 import './App.css';
+import ModalComponent from './Components/modal/modal';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    state = { counter: 0 };
+
+    modalRef: any = React.createRef();
+
+    handleOk = () => {
+        alert('Clicou!');
+    }
+
+    openModal = () => {
+        this.modalRef.current.toggleModal(true);
+    }
+
+    render = () => {
+        return (
+
+            <div className="App">
+                <ModalComponent ref={this.modalRef} title='Meu modal' handleOk={this.handleOk} hideButton={true}
+                    customFooter={[<Button type="primary" onClick={() => { this.openModal() }}> Oiee </Button>]}>
+                    <h1>Olá</h1>
+                </ModalComponent>
+
+                <Button type="primary" onClick={() => { this.openModal() }}> Abrir </Button>
+            </div>
+        )
+    }
 }
 
 export default App;
